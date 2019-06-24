@@ -1,0 +1,44 @@
+plugins {
+	id 'org.springframework.boot' version '2.1.6.RELEASE'
+	id 'java'
+}
+plugins {
+	id 'war'
+}
+war {
+	enabled=true
+}
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.dest'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+}
+
+configurations {
+	provided
+}
+
+sourceSets {
+	main.compileClasspath += configurations.provided
+	test.compileClasspath += configurations.provided
+	test.runtimeClasspath += configurations.provided
+}
+
+dependencies {
+
+	compile('org.springframework.boot:spring-boot-starter-data-rest') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	
+	compile('org.springframework.boot:spring-boot-starter-web') {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-tomcat'
+	}
+	
+	
+	providedRuntime('org.springframework.boot:spring-boot-starter-undertow')
+	providedCompile('javax.servlet:javax.servlet-api')
+}

@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>/springapp</context-root>
+</jboss-web>
